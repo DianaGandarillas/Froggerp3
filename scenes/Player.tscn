@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dlx0amglvbx5k"]
+
+[ext_resource type="Script" uid="uid://p8fta1ga0idb" path="res://scripts/player.gd" id="1_p0vlq"]
+[ext_resource type="Texture2D" uid="uid://cm5bpfe27gtq3" path="res://assets/sprites/frog0000.png" id="2_v6fml"]
+
+[node name="Frog" type="CharacterBody2D" unique_id=67812539]
+script = ExtResource("1_p0vlq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1584890817]
+position = Vector2(589, 524)
+texture = ExtResource("2_v6fml")

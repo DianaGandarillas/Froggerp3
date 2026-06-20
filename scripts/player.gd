@@ -1,41 +1,55 @@
 extends CharacterBody2D
 
+const TILE_SIZE = 50  # tamaño de cada casilla del mapa
 
-@export var speed := 200
+@onready var sprite = $Sprite  # referencia al AnimatedSprite2D
 
-@onready var sprite := $Sprite2D
+var esta_saltando = false  # para no moverse mientras anima el salto
 
-var moving := false
+func _ready():
+	sprite.animation_finished.connect(_on_animation_finished)
+	sprite.play("idle")
 
-
-func _physics_process(delta: float) -> void:
-	var direction := Vector2.ZERO
-
-	if Input.is_action_pressed("right"):
-		direction.x += 1
-	if Input.is_action_pressed("left"):
-		direction.x -= 1
-	if Input.is_action_pressed("down"):
-		direction.y += 1
-	if Input.is_action_pressed("up"):
-		direction.y -= 1
-
-	if direction != Vector2.ZERO:
-		velocity = direction.normalized() * speed
-		moving = true
-	else:
-		velocity = Vector2.ZERO
-		moving = false
-
-	move_and_slide()
-
-	_update_sprite()
+func _input(event):
+	# Bloqueamos input si ya está en medio de un salto
+	if esta_saltando:
+		return
 	
+	if event.is_action_pressed("up"):
+		saltar(Vector2.UP)
+	elif event.is_action_pressed("down"):
+		saltar(Vector2.DOWN)
+	elif event.is_action_pressed("left"):
+		saltar(Vector2.LEFT)
+	elif event.is_action_pressed("right"):
+		saltar(Vector2.RIGHT)
+
+func saltar(direccion: Vector2):
+	esta_saltando = true
 	
+	# Mover la posición inmediatamente (movimiento por casillas)
+	position += direccion * TILE_SIZE
 	
+	# Rotar/voltear el sprite según la dirección
+	match direccion:
+		Vector2.UP:
+			sprite.rotation_degrees = 0      # mira arriba (posición original)
+			sprite.flip_h = false
+		Vector2.DOWN:
+			sprite.rotation_degrees = 180    # mira abajo
+			sprite.flip_h = false
+		Vector2.LEFT:
+			sprite.rotation_degrees = 90     # mira a la izquierda
+			sprite.flip_h = false
+		Vector2.RIGHT:
+			sprite.rotation_degrees = -90    # mira a la derecha
+			sprite.flip_h = false
 	
-func _update_sprite():
-	if moving:
-		sprite.texture = preload("res://assets/sprites/frog0001.png")
-	else:
-		sprite.texture = preload("res://assets/sprites/frog0000.png")
+	# Reproducir animación de salto
+	sprite.play("jump")
+
+func _on_animation_finished():
+	# Cuando termina el salto, volvé a idle y desbloqueá el input
+	if sprite.animation == "jump":
+		sprite.play("idle")
+		esta_saltando = false

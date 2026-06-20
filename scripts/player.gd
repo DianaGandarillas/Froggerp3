@@ -3,12 +3,22 @@ extends CharacterBody2D
 const TILE_SIZE = 50  # tamaño de cada casilla del mapa
 
 @onready var sprite = $Sprite  # referencia al AnimatedSprite2D
+@onready var hitbox = $HitBox
 
 var esta_saltando = false  # para no moverse mientras anima el salto
 
 func _ready():
 	sprite.animation_finished.connect(_on_animation_finished)
+	hitbox.area_entered.connect(_on_area_entered)
 	sprite.play("idle")
+	
+func morir():
+	esta_saltando = true
+	sprite.play("muerte")
+	
+func _on_area_entered(area: Area2D):
+	if area.is_in_group("peligro"):
+		morir()
 
 func _input(event):
 	# Bloqueamos input si ya está en medio de un salto
@@ -47,9 +57,12 @@ func saltar(direccion: Vector2):
 	
 	# Reproducir animación de salto
 	sprite.play("jump")
+	
 
 func _on_animation_finished():
 	# Cuando termina el salto, volvé a idle y desbloqueá el input
 	if sprite.animation == "jump":
 		sprite.play("idle")
 		esta_saltando = false
+	elif sprite.animation == "muerte":
+		get_tree().reload_current_scene()

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cs7w7p8bg4cc3"]
+
+[ext_resource type="Script" uid="uid://lg65xpnod2yq" path="res://scripts/car.gd" id="1_i6wfo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6wfo"]
+size = Vector2(21, 16)
+
+[node name="Car" type="Area2D" unique_id=1799251712 groups=["peligro"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_i6wfo")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=287888542]
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=442994359]
+shape = SubResource("RectangleShape2D_i6wfo")

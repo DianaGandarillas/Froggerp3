@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://k4syugghhd6"]
+
+[ext_resource type="PackedScene" uid="uid://cys0i66klxip3" path="res://scenes/obstacles/CarLane.tscn" id="1_0j05m"]
+[ext_resource type="PackedScene" uid="uid://cs7w7p8bg4cc3" path="res://scenes/obstacles/Car.tscn" id="2_yv73f"]
+[ext_resource type="Texture2D" uid="uid://qvx6g5radrf6" path="res://assets/sprites/car_3.png" id="3_o15s1"]
+[ext_resource type="PackedScene" uid="uid://dlx0amglvbx5k" path="res://scenes/Player.tscn" id="4_wej8e"]
+
+[node name="World" type="Node2D" unique_id=1953185021]
+
+[node name="CarLane" parent="." unique_id=125655145 instance=ExtResource("1_0j05m")]
+position = Vector2(-17, 360)
+car_scene = ExtResource("2_yv73f")
+textura = ExtResource("3_o15s1")
+y_position = 320.0
+
+[node name="Player" parent="." unique_id=309223163 instance=ExtResource("4_wej8e")]
+position = Vector2(584, 609)

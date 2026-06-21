@@ -8,11 +8,14 @@ const TILE_SIZE = 50  # tamaño de cada casilla del mapa
 var esta_saltando = false  # para no moverse mientras anima el salto
 var en_plataforma = false
 var velocidad_plataforma = 0.0
+var posicion_inicial: Vector2
 
 # NUEVA VARIABLE: Para saber si ya estamos en proceso de morir
 var esta_muerto = false 
 
 func _ready():
+	posicion_inicial = global_position 
+	
 	sprite.animation_finished.connect(_on_animation_finished)
 	hitbox.area_entered.connect(_on_area_entered)
 	sprite.play("idle")
@@ -81,12 +84,25 @@ func saltar(direccion: Vector2):
 	
 
 func _on_animation_finished():
-	# Cuando termina el salto, si no hemos muerto, vuelve a idle
 	if sprite.animation == "jump" and not esta_muerto:
 		sprite.play("idle")
 		esta_saltando = false
+		
 	elif sprite.animation == "muerte":
-		get_tree().reload_current_scene()
+		# EN LUGAR DE REINICIAR LA ESCENA, REINICIAMOS LA RANA:
+		
+		# 1. La teletransportamos a la acera de inicio
+		global_position = posicion_inicial
+		
+		# 2. Reseteamos su rotación para que vuelva a mirar hacia arriba
+		sprite.rotation_degrees = 0
+		
+		# 3. Le devolvemos la vida y el control
+		esta_muerto = false
+		esta_saltando = false
+		
+		# 4. Volvemos a la animación normal
+		sprite.play("idle")
 		
 func _process(delta):
 	# Si ya estamos muertos, dejamos de revisar colisiones

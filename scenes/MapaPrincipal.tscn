@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://btyqjqd2ctdtu" path="res://scenes/Agua.tscn" id="8_heb1w"]
 [ext_resource type="PackedScene" uid="uid://3n5hivpc5tf0" path="res://scenes/obstacles/Log.tscn" id="9_s54s1"]
 [ext_resource type="Texture2D" uid="uid://y5i8we26q4r5" path="res://assets/sprites/log_middle.png" id="10_cdqdp"]
+[ext_resource type="PackedScene" uid="uid://ct8lifp2plq0x" path="res://scenes/obstacles/Meta.tscn" id="11_s54s1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jaxgt"]
 texture = ExtResource("1_jaxgt")
@@ -71,7 +72,7 @@ textura = ExtResource("6_obnww")
 direccion = -1.0
 
 [node name="Agua" parent="." unique_id=333207234 instance=ExtResource("8_heb1w")]
-position = Vector2(-0.68922424, -17.883667)
+position = Vector2(-0.68922424, 0.11633301)
 
 [node name="CarLane6" parent="." unique_id=1816859844 instance=ExtResource("4_7hj5l")]
 position = Vector2(6.3177795, 124.17566)
@@ -98,3 +99,18 @@ position = Vector2(6.3177795, 275.17566)
 car_scene = ExtResource("9_s54s1")
 textura = ExtResource("10_cdqdp")
 tipo = 1
+
+[node name="Meta" parent="." unique_id=1974364635 instance=ExtResource("11_s54s1")]
+position = Vector2(62.446167, 49.511612)
+
+[node name="Meta2" parent="." unique_id=1020341283 instance=ExtResource("11_s54s1")]
+position = Vector2(312.44617, 49.511612)
+
+[node name="Meta3" parent="." unique_id=291775591 instance=ExtResource("11_s54s1")]
+position = Vector2(562.44617, 49.511612)
+
+[node name="Meta4" parent="." unique_id=1099219100 instance=ExtResource("11_s54s1")]
+position = Vector2(811.44617, 49.511612)
+
+[node name="Meta5" parent="." unique_id=1287294390 instance=ExtResource("11_s54s1")]
+position = Vector2(1062.4462, 49.511612)

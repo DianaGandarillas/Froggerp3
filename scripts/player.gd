@@ -25,11 +25,21 @@ func morir():
 	esta_muerto = true
 	esta_saltando = true # Bloqueamos el movimiento
 	sprite.play("muerte")
+
+func ganar():
+	# Bloqueamos el movimiento para que el jugador no siga saltando
+	esta_saltando = true 
 	
+	print("¡OBJETIVO COMPLETADO!")
+	
+	# Aquí podemos reiniciar el nivel entero como si fuera un nivel nuevo
+	get_tree().reload_current_scene()
+
 func _on_area_entered(area: Area2D):
-	# Recuperamos la colisión instantánea para los autos
 	if area.is_in_group("peligro"):
 		morir()
+	elif area.is_in_group("meta"):
+		ganar()
 
 func _input(event):
 	# Bloqueamos input si ya está en medio de un salto O si ya murió

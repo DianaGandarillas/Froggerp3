@@ -7,6 +7,8 @@ var metas_totales = 5
 @onready var label_nivel = $CanvasLayer/LabelNivel      
 @onready var label_puntaje = $CanvasLayer/LabelPuntaje
 
+@onready var sonido_nivel = $SonidoNivel
+
 @export var pausa_scene: PackedScene
 var pausa_activa = false
 
@@ -48,6 +50,8 @@ func sumar_meta():
 		# Al recargar la escena, las metas se vaciarán solas, 
 		# pero los CarLane leerán el nuevo Global.nivel_actual y serán más rápidos.
 		#get_tree().reload_current_scene()
+		sonido_nivel.play()
+		await sonido_nivel.finished
 		call_deferred("_cambiar_nivel")
 		
 func _cambiar_nivel():

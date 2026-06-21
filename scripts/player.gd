@@ -5,6 +5,9 @@ const TILE_SIZE = 50
 @onready var sprite = $Sprite
 @onready var hitbox = $HitBox
 
+@onready var sonido_movimiento = $SonidoMovimiento
+@onready var sonido_muerte = $SonidoMuerte
+
 var esta_saltando = false
 var en_plataforma = false
 var velocidad_plataforma = 0.0
@@ -26,6 +29,7 @@ func morir():
 	get_parent().jugador_murio()
 	if Global.vidas > 0:
 		sprite.play("muerte")
+		sonido_muerte.play()
 
 func reiniciar_posicion():
 	global_position = posicion_inicial
@@ -89,6 +93,7 @@ func saltar(direccion: Vector2):
 			sprite.flip_h = false
 
 	sprite.play("jump")
+	sonido_movimiento.play()
 
 func _on_animation_finished():
 	if sprite.animation == "jump" and not esta_muerto:

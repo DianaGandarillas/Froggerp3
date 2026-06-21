@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cm5bpfe27gtq3" path="res://assets/sprites/frog0000.png" id="2_mdl7e"]
 [ext_resource type="Texture2D" uid="uid://gddwf2h8amyt" path="res://assets/sprites/frog0001.png" id="3_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://dlufcbwii6xke" path="res://assets/sprites/frog_death0006.png" id="4_mdl7e"]
+[ext_resource type="AudioStream" uid="uid://cquoyqn7amror" path="res://assets/sounds/A_move.wav" id="5_70d11"]
+[ext_resource type="AudioStream" uid="uid://dhjuitg8to0x1" path="res://assets/sounds/A_death.wav" id="6_cw2d6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
 animations = [{
@@ -57,5 +59,11 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=956045761]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_qu4a1")
+
+[node name="SonidoMovimiento" type="AudioStreamPlayer2D" parent="." unique_id=347485547]
+stream = ExtResource("5_70d11")
+
+[node name="SonidoMuerte" type="AudioStreamPlayer2D" parent="." unique_id=240357833]
+stream = ExtResource("6_cw2d6")
 
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]

@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://bnjv0ya51ors2" path="res://scenes/obstacles/TroncoLargo.tscn" id="13_tfcjc"]
 [ext_resource type="PackedScene" uid="uid://csav3ep5okco8" path="res://scenes/obstacles/Tortugas3.tscn" id="14_tfcjc"]
 [ext_resource type="PackedScene" uid="uid://d2oegsjwgmgp0" path="res://scenes/CanvasLayer.tscn" id="16_tfcjc"]
+[ext_resource type="AudioStream" uid="uid://bmhkmj0ki8qlo" path="res://assets/sounds/A_soundtrack.wav" id="18_udhwd"]
+[ext_resource type="AudioStream" uid="uid://yfl6jc6h115f" path="res://assets/sounds/A_score.wav" id="19_6t3vj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jaxgt"]
 texture = ExtResource("1_jaxgt")
@@ -130,3 +132,10 @@ position = Vector2(848.3989, 23.909225)
 position = Vector2(1099.3989, 23.909225)
 
 [node name="CanvasLayer" parent="." unique_id=1722953857 instance=ExtResource("16_tfcjc")]
+
+[node name="Soundtrack" type="AudioStreamPlayer2D" parent="." unique_id=1299769970]
+stream = ExtResource("18_udhwd")
+autoplay = true
+
+[node name="SonidoNivel" type="AudioStreamPlayer2D" parent="." unique_id=905813621]
+stream = ExtResource("19_6t3vj")

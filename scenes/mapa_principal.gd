@@ -7,8 +7,26 @@ var metas_totales = 5
 @onready var label_nivel = $CanvasLayer/LabelNivel      
 @onready var label_puntaje = $CanvasLayer/LabelPuntaje
 
+@export var pausa_scene: PackedScene
+var pausa_activa = false
+
 func _ready():
 	actualizar_hud()
+	
+func _input(event):
+	if event.is_action_pressed("cancel"):
+		if not pausa_activa:
+			pausar()
+			
+			
+func pausar():
+	pausa_activa = true
+	get_tree().paused = true
+	var pausa = pausa_scene.instantiate()
+	$CanvasLayer.add_child(pausa)
+	
+func reanudar():
+	pausa_activa = false
 
 func sumar_meta():
 	metas_completadas += 1

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxi5hefn5tld" path="res://scenes/mapa_principal.gd" id="1_cdqdp"]
 [ext_resource type="Texture2D" uid="uid://dejcd36upxqtm" path="res://assets/sprites/flower_ground_1.png" id="1_jaxgt"]
 [ext_resource type="Texture2D" uid="uid://dr28c7fn74xrq" path="res://assets/sprites/flower_ground_2.png" id="2_du2qh"]
+[ext_resource type="PackedScene" uid="uid://bftpvwrjufa88" path="res://scenes/Pausa.tscn" id="2_ylc14"]
 [ext_resource type="PackedScene" uid="uid://dlx0amglvbx5k" path="res://scenes/Player.tscn" id="3_ducva"]
 [ext_resource type="PackedScene" uid="uid://cys0i66klxip3" path="res://scenes/obstacles/CarLane.tscn" id="4_7hj5l"]
 [ext_resource type="Texture2D" uid="uid://qvx6g5radrf6" path="res://assets/sprites/car_3.png" id="5_3lojk"]
@@ -35,6 +36,7 @@ sources/1 = SubResource("TileSetAtlasSource_du2qh")
 [node name="MapaPrincipal" type="Node2D" unique_id=1135449587]
 position = Vector2(2, 50)
 script = ExtResource("1_cdqdp")
+pausa_scene = ExtResource("2_ylc14")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=556459340]
 offset_left = -2.0

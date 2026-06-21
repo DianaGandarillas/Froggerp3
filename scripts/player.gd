@@ -38,11 +38,26 @@ func ganar():
 	# Aquí podemos reiniciar el nivel entero como si fuera un nivel nuevo
 	get_tree().reload_current_scene()
 
+func reiniciar_posicion():
+	global_position = posicion_inicial
+	sprite.rotation_degrees = 0
+	esta_muerto = false
+	esta_saltando = false
+	sprite.play("idle")
+
 func _on_area_entered(area: Area2D):
 	if area.is_in_group("peligro"):
 		morir()
+		
 	elif area.is_in_group("meta"):
-		ganar()
+		# Le decimos a la meta que ejecute su función. Si devuelve 'true' (estaba vacía):
+		if area.ocupar():
+			
+			# Buscamos al nodo padre (MainLevel) y le decimos que sume 1 al contador
+			get_parent().sumar_meta()
+			
+			# Teletransportamos a la rana al inicio para que busque la siguiente meta
+			reiniciar_posicion()
 
 func _input(event):
 	# Bloqueamos input si ya está en medio de un salto O si ya murió
@@ -89,6 +104,10 @@ func _on_animation_finished():
 		esta_saltando = false
 		
 	elif sprite.animation == "muerte":
+		# Llamamos a nuestra nueva función modular
+		reiniciar_posicion()
+		
+	elif sprite.animation == "muerte":
 		# EN LUGAR DE REINICIAR LA ESCENA, REINICIAMOS LA RANA:
 		
 		# 1. La teletransportamos a la acera de inicio
@@ -132,3 +151,4 @@ func _process(delta):
 	elif en_agua:
 		# Si tocamos agua y NO estamos en un tronco, morimos (solo se llamará 1 vez gracias a 'esta_muerto')
 		morir()
+		

@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://df5ijn3e0oc2y"]
 
+[ext_resource type="Script" uid="uid://cxi5hefn5tld" path="res://scenes/mapa_principal.gd" id="1_cdqdp"]
 [ext_resource type="Texture2D" uid="uid://dejcd36upxqtm" path="res://assets/sprites/flower_ground_1.png" id="1_jaxgt"]
 [ext_resource type="Texture2D" uid="uid://dr28c7fn74xrq" path="res://assets/sprites/flower_ground_2.png" id="2_du2qh"]
 [ext_resource type="PackedScene" uid="uid://dlx0amglvbx5k" path="res://scenes/Player.tscn" id="3_ducva"]
@@ -28,6 +29,7 @@ sources/0 = SubResource("TileSetAtlasSource_jaxgt")
 sources/1 = SubResource("TileSetAtlasSource_du2qh")
 
 [node name="MapaPrincipal" type="Node2D" unique_id=1135449587]
+script = ExtResource("1_cdqdp")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=556459340]
 offset_left = -2.0

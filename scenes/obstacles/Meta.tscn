@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://ct8lifp2plq0x"]
 
+[ext_resource type="Script" uid="uid://4psx63ikri0i" path="res://scenes/obstacles/meta.gd" id="1_83tmb"]
+[ext_resource type="Texture2D" uid="uid://cm5bpfe27gtq3" path="res://assets/sprites/frog0000.png" id="2_2dcqm"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rkg0"]
 size = Vector2(100, 50)
 
 [node name="Meta" type="Area2D" unique_id=1974364635 groups=["meta"]]
 collision_layer = 2
+script = ExtResource("1_83tmb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=500989837]
 position = Vector2(66.87499, 36.249996)
 shape = SubResource("RectangleShape2D_1rkg0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=476617731]
+visible = false
+texture = ExtResource("2_2dcqm")

@@ -6,24 +6,40 @@
 [ext_resource type="Texture2D" uid="uid://bcek51u6ef50k" path="res://assets/sprites/log_right.png" id="4_xyg13"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a55gx"]
-size = Vector2(45.346283, 10.500999)
+size = Vector2(75.92236, 10.784423)
 
 [node name="TroncoLargo" type="Area2D" unique_id=226137933 groups=["plataforma"]]
-position = Vector2(41.2482, 12.976959)
+position = Vector2(7.6293945e-06, 0)
+scale = Vector2(1.3, 1.3)
+collision_layer = 2
 script = ExtResource("1_p3d38")
 
 [node name="Izq" type="Sprite2D" parent="." unique_id=998982089]
-position = Vector2(-14.490467, -0.4634552)
+position = Vector2(11.971071, 9.536543)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_a55gx")
 
 [node name="Medio" type="Sprite2D" parent="." unique_id=253855184]
-position = Vector2(1.1481247, -0.30480194)
+position = Vector2(32.481434, 9.695196)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("3_r25n5")
+
+[node name="Medio2" type="Sprite2D" parent="." unique_id=858321655]
+position = Vector2(53.455803, 9.695196)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("3_r25n5")
+
+[node name="Medio3" type="Sprite2D" parent="." unique_id=1892571851]
+position = Vector2(73.660934, 9.695196)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("3_r25n5")
 
 [node name="Der" type="Sprite2D" parent="." unique_id=19567277]
-position = Vector2(16.210667, -0.30480194)
+position = Vector2(93.492714, 9.695196)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("4_xyg13")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2064576802]
-position = Vector2(0.15539551, -0.23781204)
+position = Vector2(51.53745, 9.095093)
+scale = Vector2(1.3, 1.3)
 shape = SubResource("RectangleShape2D_a55gx")

@@ -8,7 +8,7 @@ var limite_izquierda: float
 
 func _ready():
 	if direccion < 0:
-		$Sprite.flip_h = true
+		scale.x = -1
 
 # Esta función la llama car_lane.gd DESPUÉS de asignar la textura
 func inicializar():

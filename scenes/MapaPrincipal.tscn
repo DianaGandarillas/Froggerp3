@@ -78,6 +78,7 @@ position = Vector2(6.3177795, 124.17566)
 car_scene = ExtResource("9_s54s1")
 textura = ExtResource("10_cdqdp")
 tipo = 1
+direccion = -1.0
 
 [node name="CarLane7" parent="." unique_id=1856268480 instance=ExtResource("4_7hj5l")]
 position = Vector2(6.3177795, 174.17566)
@@ -90,6 +91,7 @@ position = Vector2(6.3177795, 224.17566)
 car_scene = ExtResource("9_s54s1")
 textura = ExtResource("10_cdqdp")
 tipo = 1
+direccion = -1.0
 
 [node name="CarLane9" parent="." unique_id=1072927570 instance=ExtResource("4_7hj5l")]
 position = Vector2(6.3177795, 275.17566)

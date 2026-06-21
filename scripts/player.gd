@@ -9,22 +9,31 @@ var esta_saltando = false  # para no moverse mientras anima el salto
 var en_plataforma = false
 var velocidad_plataforma = 0.0
 
+# NUEVA VARIABLE: Para saber si ya estamos en proceso de morir
+var esta_muerto = false 
+
 func _ready():
 	sprite.animation_finished.connect(_on_animation_finished)
 	hitbox.area_entered.connect(_on_area_entered)
 	sprite.play("idle")
 	
 func morir():
-	esta_saltando = true
+	# Si ya está muerto, ignoramos la orden para que la animación fluya
+	if esta_muerto: 
+		return
+		
+	esta_muerto = true
+	esta_saltando = true # Bloqueamos el movimiento
 	sprite.play("muerte")
 	
 func _on_area_entered(area: Area2D):
+	# Recuperamos la colisión instantánea para los autos
 	if area.is_in_group("peligro"):
 		morir()
 
 func _input(event):
-	# Bloqueamos input si ya está en medio de un salto
-	if esta_saltando:
+	# Bloqueamos input si ya está en medio de un salto O si ya murió
+	if esta_saltando or esta_muerto:
 		return
 	
 	if event.is_action_pressed("up"):
@@ -45,7 +54,7 @@ func saltar(direccion: Vector2):
 	# Rotar/voltear el sprite según la dirección
 	match direccion:
 		Vector2.UP:
-			sprite.rotation_degrees = 0      # mira arriba (posición original)
+			sprite.rotation_degrees = 0      # mira arriba 
 			sprite.flip_h = false
 		Vector2.DOWN:
 			sprite.rotation_degrees = 180    # mira abajo
@@ -62,22 +71,25 @@ func saltar(direccion: Vector2):
 	
 
 func _on_animation_finished():
-	# Cuando termina el salto, volvé a idle y desbloqueá el input
-	if sprite.animation == "jump":
+	# Cuando termina el salto, si no hemos muerto, vuelve a idle
+	if sprite.animation == "jump" and not esta_muerto:
 		sprite.play("idle")
 		esta_saltando = false
 	elif sprite.animation == "muerte":
 		get_tree().reload_current_scene()
 		
 func _process(delta):
+	# Si ya estamos muertos, dejamos de revisar colisiones
+	if esta_muerto:
+		return 
+		
 	# 1. Asumimos que no estamos en el agua ni en el tronco
 	en_plataforma = false
 	velocidad_plataforma = 0.0
 	var en_agua = false
 	
 	# 2. Escaneamos TODO lo que la rana está tocando AHORA MISMO
-	# Reemplaza "$HitBox" por el nombre de tu nodo Area2D de la rana si se llama distinto
-	var areas_tocadas = $HitBox.get_overlapping_areas() 
+	var areas_tocadas = hitbox.get_overlapping_areas() 
 	
 	# 3. Revisamos una por una las cosas que estamos tocando
 	for area in areas_tocadas:
@@ -92,14 +104,5 @@ func _process(delta):
 		# Si estamos en el tronco, nos movemos con él
 		position.x += velocidad_plataforma * delta
 	elif en_agua:
-		# Si tocamos agua y NO estamos en un tronco, morimos
+		# Si tocamos agua y NO estamos en un tronco, morimos (solo se llamará 1 vez gracias a 'esta_muerto')
 		morir()
-
-
-# Función auxiliar para chequear el agua al saltar
-func _revisar_caida_agua():
-	# get_overlapping_areas() devuelve todas las áreas que estamos tocando ahora mismo
-	var areas = $HitBox.get_overlapping_areas() # Cambia $HitBox por el nombre de tu nodo Area2D
-	for a in areas:
-		if a.is_in_group("agua") and not en_plataforma:
-			morir()

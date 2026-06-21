@@ -4,7 +4,8 @@
 size = Vector2(1202.1246, 306.06323)
 
 [node name="Agua" type="Area2D" unique_id=333207234 groups=["agua"]]
+collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1777244533]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1777244533 groups=["agua"]]
 position = Vector2(598.769, 143.03162)
 shape = SubResource("RectangleShape2D_p0s8n")

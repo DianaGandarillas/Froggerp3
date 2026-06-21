@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="FroggerJuego"
+run/main_scene="uid://df5ijn3e0oc2y"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1200
 
 [input]
 

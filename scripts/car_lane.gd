@@ -13,32 +13,41 @@ enum TipoCarril { DOS_RAPIDO, TRES_LENTO, DOS_MUY_RAPIDO }
 # Configuración de cada tipo
 # [cantidad, velocidad, separacion_entre_autos]
 const CONFIGS = {
-	TipoCarril.DOS_RAPIDO:     [2, 180.0, 180.0],
-	TipoCarril.TRES_LENTO:     [3, 100.0, 140.0],
-	TipoCarril.DOS_MUY_RAPIDO: [2, 240.0, 260.0],
+	TipoCarril.DOS_RAPIDO:     [4, 180.0, 180.0],
+	TipoCarril.TRES_LENTO:     [5, 100.0, 140.0],
+	TipoCarril.DOS_MUY_RAPIDO: [3, 240.0, 260.0],
 }
 
 func _ready():
-	position.y = y_position
+	#position.y = y_position
 	_crear_autos()
 
 func _crear_autos():
 	var config = CONFIGS[tipo]
 	var cantidad   = config[0]
-	var velocidad  = config[1]
+	var velocidad_base  = config[1]
 	var separacion = config[2]
+
+	# --- LA MAGIA DEL RANDOM ---
+	# 1. Desfase inicial: Elegimos un número al azar entre 0 y 800 píxeles.
+	# Esto moverá todo el bloque de autos de este carril hacia adelante o atrás.
+	var offset_inicial = randf_range(0, 800)
+	
+	# 2. Variación de velocidad: Multiplicamos la velocidad base por un 
+	# valor entre 0.8 (80%) y 1.2 (120%). Así ningún carril será idéntico a otro.
+	var velocidad_final = velocidad_base * randf_range(0.8, 1.2)
 
 	for i in cantidad:
 		var auto = car_scene.instantiate()
 		add_child(auto)
 
-		# Posición X: distribuidos a lo largo del carril
-		auto.position.x = i * separacion
+		# Posición X: Le sumamos nuestro offset aleatorio a la separación normal
+		auto.position.x = (i * separacion) + offset_inicial
 
-		# Propiedades
-		auto.velocidad = velocidad
+		# Propiedades con la nueva velocidad alterada
+		auto.velocidad = velocidad_final
 		auto.direccion = direccion
 
-		# Asignar el sprite correcto
+		# Asignar el sprite correcto y arrancar
 		auto.get_node("Sprite").texture = textura
 		auto.inicializar()

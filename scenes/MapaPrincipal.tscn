@@ -1,0 +1,98 @@
+[gd_scene format=4 uid="uid://df5ijn3e0oc2y"]
+
+[ext_resource type="Texture2D" uid="uid://dejcd36upxqtm" path="res://assets/sprites/flower_ground_1.png" id="1_jaxgt"]
+[ext_resource type="Texture2D" uid="uid://dr28c7fn74xrq" path="res://assets/sprites/flower_ground_2.png" id="2_du2qh"]
+[ext_resource type="PackedScene" uid="uid://dlx0amglvbx5k" path="res://scenes/Player.tscn" id="3_ducva"]
+[ext_resource type="PackedScene" uid="uid://cys0i66klxip3" path="res://scenes/obstacles/CarLane.tscn" id="4_7hj5l"]
+[ext_resource type="Texture2D" uid="uid://qvx6g5radrf6" path="res://assets/sprites/car_3.png" id="5_3lojk"]
+[ext_resource type="Texture2D" uid="uid://bpyxgpy6h2sur" path="res://assets/sprites/car_2.png" id="6_obnww"]
+[ext_resource type="Texture2D" uid="uid://bxmur7nt26uo4" path="res://assets/sprites/car_1.png" id="7_2rc2t"]
+[ext_resource type="PackedScene" uid="uid://btyqjqd2ctdtu" path="res://scenes/Agua.tscn" id="8_heb1w"]
+[ext_resource type="PackedScene" uid="uid://3n5hivpc5tf0" path="res://scenes/obstacles/Log.tscn" id="9_s54s1"]
+[ext_resource type="Texture2D" uid="uid://y5i8we26q4r5" path="res://assets/sprites/log_middle.png" id="10_cdqdp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jaxgt"]
+texture = ExtResource("1_jaxgt")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_du2qh"]
+texture = ExtResource("2_du2qh")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ducva"]
+tile_size = Vector2i(50, 50)
+sources/0 = SubResource("TileSetAtlasSource_jaxgt")
+sources/1 = SubResource("TileSetAtlasSource_du2qh")
+
+[node name="MapaPrincipal" type="Node2D" unique_id=1135449587]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=556459340]
+offset_left = -2.0
+offset_top = 314.0
+offset_right = 1198.0
+offset_bottom = 648.0
+color = Color(0.03478946, 0.0708589, 0.05276759, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1719184900]
+offset_right = 1199.0
+offset_bottom = 314.0
+color = Color(0.013666715, 4.813075e-08, 0.31376827, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=86602423]
+tile_map_data = PackedByteArray("AAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAYAAAAAAAAAAAAQAAYAAAAAAAAAAAARAAYAAAAAAAAAAAASAAYAAAAAAAAAAAATAAYAAAAAAAAAAAAUAAYAAAAAAAAAAAAVAAYAAAAAAAAAAAAWAAYAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAATAAAAAQAAAAAAAAAUAAAAAQAAAAAAAAAVAAAAAQAAAAAAAAAWAAAAAQAAAAAAAAATAAEAAQAAAAAAAAASAAEAAQAAAAAAAAAOAAEAAQAAAAAAAAANAAEAAQAAAAAAAAAAAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAJAAEAAQAAAAAAAAAKAAEAAQAAAAAAAAAPAAEAAQAAAAAAAAAUAAEAAQAAAAAAAAAXAAEAAQAAAAAAAAAXAAAAAQAAAAAAAAAXAAYAAAAAAAAAAAADAAwAAAAAAAAAAAAEAAwAAAAAAAAAAAAFAAwAAAAAAAAAAAAGAAwAAAAAAAAAAAAHAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAJAAwAAAAAAAAAAAAKAAwAAAAAAAAAAAAMAAwAAAAAAAAAAAANAAwAAAAAAAAAAAAOAAwAAAAAAAAAAAAPAAwAAAAAAAAAAAAQAAwAAAAAAAAAAAARAAwAAAAAAAAAAAASAAwAAAAAAAAAAAATAAwAAAAAAAAAAAAUAAwAAAAAAAAAAAAVAAwAAAAAAAAAAAAWAAwAAAAAAAAAAAAXAAwAAAAAAAAAAAAAAAwAAAAAAAAAAAABAAwAAAAAAAAAAAACAAwAAAAAAAAAAAALAAwAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ducva")
+
+[node name="Player" parent="." unique_id=309223163 instance=ExtResource("3_ducva")]
+position = Vector2(627, 625)
+
+[node name="CarLane" parent="." unique_id=125655145 instance=ExtResource("4_7hj5l")]
+position = Vector2(8, 375)
+textura = ExtResource("5_3lojk")
+direccion = -1.0
+
+[node name="CarLane2" parent="." unique_id=1137025727 instance=ExtResource("4_7hj5l")]
+position = Vector2(8, 425)
+textura = ExtResource("6_obnww")
+
+[node name="CarLane3" parent="." unique_id=198430184 instance=ExtResource("4_7hj5l")]
+position = Vector2(8, 475)
+textura = ExtResource("7_2rc2t")
+direccion = -1.0
+
+[node name="CarLane4" parent="." unique_id=1266519530 instance=ExtResource("4_7hj5l")]
+position = Vector2(8, 525)
+textura = ExtResource("5_3lojk")
+
+[node name="CarLane5" parent="." unique_id=1536760634 instance=ExtResource("4_7hj5l")]
+position = Vector2(8, 574)
+textura = ExtResource("6_obnww")
+direccion = -1.0
+
+[node name="Agua" parent="." unique_id=333207234 instance=ExtResource("8_heb1w")]
+position = Vector2(-0.68922424, -17.883667)
+
+[node name="CarLane6" parent="." unique_id=1816859844 instance=ExtResource("4_7hj5l")]
+position = Vector2(6.3177795, 124.17566)
+car_scene = ExtResource("9_s54s1")
+textura = ExtResource("10_cdqdp")
+tipo = 1
+
+[node name="CarLane7" parent="." unique_id=1856268480 instance=ExtResource("4_7hj5l")]
+position = Vector2(6.3177795, 174.17566)
+car_scene = ExtResource("9_s54s1")
+textura = ExtResource("10_cdqdp")
+tipo = 1
+
+[node name="CarLane8" parent="." unique_id=21793392 instance=ExtResource("4_7hj5l")]
+position = Vector2(6.3177795, 224.17566)
+car_scene = ExtResource("9_s54s1")
+textura = ExtResource("10_cdqdp")
+tipo = 1
+
+[node name="CarLane9" parent="." unique_id=1072927570 instance=ExtResource("4_7hj5l")]
+position = Vector2(6.3177795, 275.17566)
+car_scene = ExtResource("9_s54s1")
+textura = ExtResource("10_cdqdp")
+tipo = 1

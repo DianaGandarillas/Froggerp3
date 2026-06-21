@@ -6,6 +6,8 @@ const TILE_SIZE = 50  # tamaño de cada casilla del mapa
 @onready var hitbox = $HitBox
 
 var esta_saltando = false  # para no moverse mientras anima el salto
+var en_plataforma = false
+var velocidad_plataforma = 0.0
 
 func _ready():
 	sprite.animation_finished.connect(_on_animation_finished)
@@ -66,3 +68,38 @@ func _on_animation_finished():
 		esta_saltando = false
 	elif sprite.animation == "muerte":
 		get_tree().reload_current_scene()
+		
+func _process(delta):
+	# 1. Asumimos que no estamos en el agua ni en el tronco
+	en_plataforma = false
+	velocidad_plataforma = 0.0
+	var en_agua = false
+	
+	# 2. Escaneamos TODO lo que la rana está tocando AHORA MISMO
+	# Reemplaza "$HitBox" por el nombre de tu nodo Area2D de la rana si se llama distinto
+	var areas_tocadas = $HitBox.get_overlapping_areas() 
+	
+	# 3. Revisamos una por una las cosas que estamos tocando
+	for area in areas_tocadas:
+		if area.is_in_group("plataforma"):
+			en_plataforma = true
+			velocidad_plataforma = area.velocidad * area.direccion
+		elif area.is_in_group("agua"):
+			en_agua = true
+
+	# 4. Aplicamos la lógica de vida o muerte
+	if en_plataforma:
+		# Si estamos en el tronco, nos movemos con él
+		position.x += velocidad_plataforma * delta
+	elif en_agua:
+		# Si tocamos agua y NO estamos en un tronco, morimos
+		morir()
+
+
+# Función auxiliar para chequear el agua al saltar
+func _revisar_caida_agua():
+	# get_overlapping_areas() devuelve todas las áreas que estamos tocando ahora mismo
+	var areas = $HitBox.get_overlapping_areas() # Cambia $HitBox por el nombre de tu nodo Area2D
+	for a in areas:
+		if a.is_in_group("agua") and not en_plataforma:
+			morir()

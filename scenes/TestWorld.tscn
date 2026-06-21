@@ -8,7 +8,7 @@
 [node name="World" type="Node2D" unique_id=1953185021]
 
 [node name="CarLane" parent="." unique_id=125655145 instance=ExtResource("1_0j05m")]
-position = Vector2(-17, 360)
+position = Vector2(13, 385)
 car_scene = ExtResource("2_yv73f")
 textura = ExtResource("3_o15s1")
 y_position = 320.0

@@ -48,6 +48,7 @@ func _crear_autos():
 		auto.velocidad = velocidad_final
 		auto.direccion = direccion
 
-		# Asignar el sprite correcto y arrancar
-		auto.get_node("Sprite").texture = textura
+		# Solo intentamos cambiar la textura si configuraste una en el Inspector
+		if textura != null and auto.has_node("Sprite"):
+			auto.get_node("Sprite").texture = textura
 		auto.inicializar()

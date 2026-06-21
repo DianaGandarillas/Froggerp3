@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bnjv0ya51ors2"]
+
+[ext_resource type="Script" uid="uid://ligtqmbmut0t" path="res://scripts/plataforma.gd" id="1_p3d38"]
+[ext_resource type="Texture2D" uid="uid://dorkv1nww00bk" path="res://assets/sprites/log_left.png" id="2_a55gx"]
+[ext_resource type="Texture2D" uid="uid://y5i8we26q4r5" path="res://assets/sprites/log_middle.png" id="3_r25n5"]
+[ext_resource type="Texture2D" uid="uid://bcek51u6ef50k" path="res://assets/sprites/log_right.png" id="4_xyg13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a55gx"]
+size = Vector2(45.346283, 10.500999)
+
+[node name="TroncoLargo" type="Area2D" unique_id=226137933 groups=["plataforma"]]
+position = Vector2(41.2482, 12.976959)
+script = ExtResource("1_p3d38")
+
+[node name="Izq" type="Sprite2D" parent="." unique_id=998982089]
+position = Vector2(-14.490467, -0.4634552)
+texture = ExtResource("2_a55gx")
+
+[node name="Medio" type="Sprite2D" parent="." unique_id=253855184]
+position = Vector2(1.1481247, -0.30480194)
+texture = ExtResource("3_r25n5")
+
+[node name="Der" type="Sprite2D" parent="." unique_id=19567277]
+position = Vector2(16.210667, -0.30480194)
+texture = ExtResource("4_xyg13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2064576802]
+position = Vector2(0.15539551, -0.23781204)
+shape = SubResource("RectangleShape2D_a55gx")

@@ -7,11 +7,12 @@
 size = Vector2(100, 50)
 
 [node name="Meta" type="Area2D" unique_id=1974364635 groups=["meta"]]
+position = Vector2(63.221085, 40.231598)
 collision_layer = 2
 script = ExtResource("1_83tmb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=500989837]
-position = Vector2(66.87499, 36.249996)
+position = Vector2(0.36971283, -0.28686142)
 shape = SubResource("RectangleShape2D_1rkg0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=476617731]

@@ -13,9 +13,9 @@ enum TipoCarril { DOS_RAPIDO, TRES_LENTO, DOS_MUY_RAPIDO }
 # Configuración de cada tipo
 # [cantidad, velocidad, separacion_entre_autos]
 const CONFIGS = {
-	TipoCarril.DOS_RAPIDO:     [4, 180.0, 180.0],
-	TipoCarril.TRES_LENTO:     [5, 100.0, 140.0],
-	TipoCarril.DOS_MUY_RAPIDO: [3, 240.0, 260.0],
+	TipoCarril.DOS_RAPIDO:     [4, 180.0, 300.0],
+	TipoCarril.TRES_LENTO:     [5, 100.0, 250.0],
+	TipoCarril.DOS_MUY_RAPIDO: [3, 240.0, 400.0],
 }
 
 func _ready():
@@ -33,20 +33,28 @@ func _crear_autos():
 	var velocidad_base  = config[1]
 	var separacion = config[2]
 
-	# ... (el resto de tu código de la magia del random sigue exactamente igual)
-
+	# 1. Desfase inicial para que los carriles no arranquen alineados
 	var offset_inicial = randf_range(0, 800)
-	var velocidad_final = velocidad_base * randf_range(0.8, 1.2)
+	
+	# 2. Variación aleatoria base (entre 80% y 120% de la velocidad original)
+	var velocidad_aleatoria = velocidad_base * randf_range(0.8, 1.2)
+	
+	# 3. MULTIPLICADOR DE DIFICULTAD (Orquestador Global)
+	# Aumenta la velocidad un 15% por cada nivel superado. 
+	# (Nivel 1 = 1.0x, Nivel 2 = 1.15x, Nivel 3 = 1.30x)
+	var multiplicador_nivel = 1.0 + ((Global.nivel_actual - 1) * 0.15)
+	
+	# Esta es la velocidad definitiva que se le inyectará a los objetos
+	var velocidad_final = velocidad_aleatoria * multiplicador_nivel
 
 	# --- LA MAGIA DEL ÍNDICE ÚNICO ---
-	# randi() % cantidad genera un número entero al azar entre 0 y (cantidad - 1).
-	# Por ejemplo, si el carril genera 3 tortugas, esto elegirá el 0, el 1 o el 2.
+	# Sorteamos qué posición del grupo será la trampa (si aplica)
 	var indice_traicionero = randi() % cantidad
 
 	for i in cantidad:
 		var auto = car_scene.instantiate()
 
-		# 1. PRIMERO: Configuramos todas sus propiedades y variables
+		# 1. PRIMERO: Configuramos sus propiedades ANTES de que nazca en el árbol
 		auto.position.x = (i * separacion) + offset_inicial
 		auto.velocidad = velocidad_final
 		auto.direccion = direccion
@@ -54,15 +62,16 @@ func _crear_autos():
 		if textura != null and auto.has_node("Sprite"):
 			auto.get_node("Sprite").texture = textura
 			
+		# Si la escena tiene la variable 'se_sumerge' (las tortugas), aplicamos la trampa
 		if "se_sumerge" in auto:
 			if i == indice_traicionero:
 				auto.se_sumerge = true
 			else:
 				auto.se_sumerge = false
 
-		# 2. SEGUNDO: Ahora que ya sabe si se sumerge o no, lo añadimos al juego
-		# (Esto disparará su _ready() con los valores correctos)
+		# 2. SEGUNDO: Lo añadimos al juego 
+		# (Al hacer esto, se ejecuta su _ready() con todas las variables ya configuradas)
 		add_child(auto)
 
-		# 3. TERCERO: Lo inicializamos (esto requiere que ya esté en el árbol con add_child)
+		# 3. TERCERO: Lo inicializamos para que calcule sus límites de pantalla
 		auto.inicializar()

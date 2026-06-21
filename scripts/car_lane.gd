@@ -42,10 +42,15 @@ func _crear_autos():
 	# 3. MULTIPLICADOR DE DIFICULTAD (Orquestador Global)
 	# Aumenta la velocidad un 15% por cada nivel superado. 
 	# (Nivel 1 = 1.0x, Nivel 2 = 1.15x, Nivel 3 = 1.30x)
-	var multiplicador_nivel = 1.0 + ((Global.nivel_actual - 1) * 0.15)
+	var multiplicador_nivel = 0.85 + ((Global.nivel_actual - 1) * 0.175)
 	
 	# Esta es la velocidad definitiva que se le inyectará a los objetos
 	var velocidad_final = velocidad_aleatoria * multiplicador_nivel
+
+	# Reducir dificultad en nivel 1
+	if Global.nivel_actual == 1:
+		cantidad = max(2, cantidad - 1)
+		separacion *= 1.3
 
 	# --- LA MAGIA DEL ÍNDICE ÚNICO ---
 	# Sorteamos qué posición del grupo será la trampa (si aplica)

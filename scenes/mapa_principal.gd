@@ -6,6 +6,7 @@ var metas_totales = 5
 @onready var label_vidas = $CanvasLayer/LabelVidas
 @onready var label_nivel = $CanvasLayer/LabelNivel      
 @onready var label_puntaje = $CanvasLayer/LabelPuntaje
+@onready var label_tiempo = $CanvasLayer/LabelTiempo
 
 @onready var sonido_nivel = $SonidoNivel
 
@@ -13,6 +14,7 @@ var metas_totales = 5
 var pausa_activa = false
 
 func _ready():
+	_iniciar_tiempo()
 	actualizar_hud()
 	
 func _input(event):
@@ -30,6 +32,17 @@ func pausar():
 func reanudar():
 	pausa_activa = false
 
+func _iniciar_tiempo():
+	Global.tiempo_restante = max(30.0, 60.0 - (Global.nivel_actual - 1) * 5.0)
+
+func _process(delta):
+	if not get_tree().paused and not $Player.esta_muerto:
+		Global.tiempo_restante -= delta
+		if Global.tiempo_restante <= 0:
+			Global.tiempo_restante = 0
+			$Player.morir()
+		actualizar_hud()
+
 func sumar_meta():
 	metas_completadas += 1
 	
@@ -40,9 +53,9 @@ func sumar_meta():
 	
 	if metas_completadas >= metas_totales:
 		# ¡Subimos de nivel en la memoria global!
+		Global.puntaje += int(Global.tiempo_restante) * 10
 		Global.nivel_actual += 1
 		Global.puntaje += 1000 # Bono por pasar de nivel
-		Global.vidas = 5
 		actualizar_hud()
 		
 		print("¡NIVEL COMPLETADO! Pasando al nivel: ", Global.nivel_actual)
@@ -60,10 +73,12 @@ func _cambiar_nivel():
 func actualizar_hud():
 	label_vidas.text = "Vidas: " + str(Global.vidas)
 	label_nivel.text = "Nivel: " + str(Global.nivel_actual)
-	label_puntaje.text = "Puntaje: " + str(Global.puntaje)     
+	label_puntaje.text = "Puntaje: " + str(Global.puntaje)
+	label_tiempo.text = "Tiempo: " + str(ceil(Global.tiempo_restante))     
 	
 func jugador_murio():  
 	Global.vidas -= 1
+	_iniciar_tiempo()
 	
 	if Global.puntaje > Global.record:
 		Global.record = Global.puntaje

@@ -14,6 +14,8 @@ func ocupar() -> bool:
 	# Cambiamos su grupo: ya no es una meta, ahora es un obstáculo mortal 
 	# (así la rana muere si salta a una meta que ya llenó, como en el original)
 	remove_from_group("meta")
-	add_to_group("peligro") 
+	#await get_tree().process_frame
+	#add_to_group("peligro") 
+	call_deferred("add_to_group", "peligro")
 	
 	return true

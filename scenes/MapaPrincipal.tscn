@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bhbta5po6ly72" path="res://scenes/obstacles/TroncoMediano.tscn" id="12_c0hak"]
 [ext_resource type="PackedScene" uid="uid://bnjv0ya51ors2" path="res://scenes/obstacles/TroncoLargo.tscn" id="13_tfcjc"]
 [ext_resource type="PackedScene" uid="uid://csav3ep5okco8" path="res://scenes/obstacles/Tortugas3.tscn" id="14_tfcjc"]
+[ext_resource type="PackedScene" uid="uid://d2oegsjwgmgp0" path="res://scenes/CanvasLayer.tscn" id="16_tfcjc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jaxgt"]
 texture = ExtResource("1_jaxgt")
@@ -125,3 +126,5 @@ position = Vector2(848.3989, 23.909225)
 
 [node name="Meta5" parent="." unique_id=1287294390 instance=ExtResource("11_s54s1")]
 position = Vector2(1099.3989, 23.909225)
+
+[node name="CanvasLayer" parent="." unique_id=1722953857 instance=ExtResource("16_tfcjc")]

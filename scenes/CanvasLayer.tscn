@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d2oegsjwgmgp0"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1722953857]
+
+[node name="LabelVidas" type="Label" parent="." unique_id=1910199354]
+offset_right = 110.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 19

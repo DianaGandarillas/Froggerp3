@@ -12,21 +12,20 @@ var limite_izquierda: float
 var esta_hundida = false
 
 func _ready():
-	# Si van a la izquierda, volteamos todo el escuadrón
-	if direccion < 0:
+	# Como las tortugas miran originalmente hacia la IZQUIERDA:
+	# Solo volteamos todo el escuadrón si viajan hacia la DERECHA.
+	if direccion > 0:
 		scale.x = -1
 		
-	# --- NUEVO: CONFIGURACIÓN DE ANIMACIONES ---
-	# get_children() busca a todos los "hijos" de este nodo (las 3 tortugas)
+	# --- CONFIGURACIÓN DE ANIMACIONES ---
 	for nodo in get_children():
-		# Verificamos que el hijo sea un nodo de animación
 		if nodo is AnimatedSprite2D:
 			if se_sumerge:
-				nodo.play("hundirse") # Aletean preparándose para la trampa
+				nodo.play("hundirse") 
 			else:
-				nodo.play("nadar")    # Nadan tranquilamente
+				nodo.play("nadar")    
 				
-	# --- TU CÓDIGO DEL TEMPORIZADOR SE QUEDA IGUAL ---
+	# --- CÓDIGO DEL TEMPORIZADOR ---
 	if se_sumerge:
 		var timer = Timer.new()
 		timer.wait_time = tiempo_ciclo

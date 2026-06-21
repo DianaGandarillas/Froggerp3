@@ -45,24 +45,24 @@ func _crear_autos():
 
 	for i in cantidad:
 		var auto = car_scene.instantiate()
-		add_child(auto)
 
-		# Posición X y propiedades físicas
+		# 1. PRIMERO: Configuramos todas sus propiedades y variables
 		auto.position.x = (i * separacion) + offset_inicial
 		auto.velocidad = velocidad_final
 		auto.direccion = direccion
 
-		# Asignar textura (para los autos)
 		if textura != null and auto.has_node("Sprite"):
 			auto.get_node("Sprite").texture = textura
 			
-		# --- ASIGNAR LA TRAMPA (Para las tortugas) ---
-		# Preguntamos si la escena instanciada tiene la variable 'se_sumerge'
 		if "se_sumerge" in auto:
-			# Si el turno de esta tortuga (i) es el mismo que el número sorteado, se hunde.
 			if i == indice_traicionero:
 				auto.se_sumerge = true
 			else:
 				auto.se_sumerge = false
 
+		# 2. SEGUNDO: Ahora que ya sabe si se sumerge o no, lo añadimos al juego
+		# (Esto disparará su _ready() con los valores correctos)
+		add_child(auto)
+
+		# 3. TERCERO: Lo inicializamos (esto requiere que ya esté en el árbol con add_child)
 		auto.inicializar()

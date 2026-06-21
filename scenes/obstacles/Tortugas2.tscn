@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://wxqu3jl4se4v"]
+
+[ext_resource type="Texture2D" uid="uid://c5w52hlfwoh2q" path="res://assets/sprites/turtle0001.png" id="1_cb4tv"]
+[ext_resource type="Script" uid="uid://ba45ihxspn03d" path="res://scenes/obstacles/tortugas.gd" id="1_vbpmv"]
+[ext_resource type="Texture2D" uid="uid://bbo0iabotsbk3" path="res://assets/sprites/turtle0002.png" id="2_vbpmv"]
+[ext_resource type="Texture2D" uid="uid://bvvj0o2gsdm8b" path="res://assets/sprites/turtle0003.png" id="3_ia0fk"]
+[ext_resource type="Texture2D" uid="uid://c0qfn6m5u5mvy" path="res://assets/sprites/turtle0004.png" id="4_2hlcn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c5sa3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cb4tv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vbpmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ia0fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ia0fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2hlcn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ia0fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vbpmv")
+}],
+"loop": true,
+"name": &"hundirse",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cb4tv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vbpmv")
+}],
+"loop": true,
+"name": &"nadar",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6p7c0"]
+size = Vector2(44.173035, 20)
+
+[node name="GrupoTortugas2" type="Area2D" unique_id=1568987049 groups=["plataforma"]]
+position = Vector2(42.453594, 21.487825)
+scale = Vector2(1.3, 1.3)
+collision_layer = 2
+script = ExtResource("1_vbpmv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=432977497]
+position = Vector2(-23.076927, 0)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_c5sa3")
+animation = &"nadar"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=991022672]
+position = Vector2(-0.15384865, -0.1620512)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_c5sa3")
+animation = &"nadar"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463572994]
+position = Vector2(-10.407537, 0)
+shape = SubResource("RectangleShape2D_6p7c0")

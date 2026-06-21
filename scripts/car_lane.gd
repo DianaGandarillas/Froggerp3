@@ -23,32 +23,46 @@ func _ready():
 	_crear_autos()
 
 func _crear_autos():
+	# VALIDACIÓN DE SEGURIDAD: 
+	# Si el 'tipo' actual no existe en el diccionario, forzamos un valor por defecto.
+	if not CONFIGS.has(tipo):
+		tipo = TipoCarril.DOS_RAPIDO
+		
 	var config = CONFIGS[tipo]
 	var cantidad   = config[0]
 	var velocidad_base  = config[1]
 	var separacion = config[2]
 
-	# --- LA MAGIA DEL RANDOM ---
-	# 1. Desfase inicial: Elegimos un número al azar entre 0 y 800 píxeles.
-	# Esto moverá todo el bloque de autos de este carril hacia adelante o atrás.
+	# ... (el resto de tu código de la magia del random sigue exactamente igual)
+
 	var offset_inicial = randf_range(0, 800)
-	
-	# 2. Variación de velocidad: Multiplicamos la velocidad base por un 
-	# valor entre 0.8 (80%) y 1.2 (120%). Así ningún carril será idéntico a otro.
 	var velocidad_final = velocidad_base * randf_range(0.8, 1.2)
+
+	# --- LA MAGIA DEL ÍNDICE ÚNICO ---
+	# randi() % cantidad genera un número entero al azar entre 0 y (cantidad - 1).
+	# Por ejemplo, si el carril genera 3 tortugas, esto elegirá el 0, el 1 o el 2.
+	var indice_traicionero = randi() % cantidad
 
 	for i in cantidad:
 		var auto = car_scene.instantiate()
 		add_child(auto)
 
-		# Posición X: Le sumamos nuestro offset aleatorio a la separación normal
+		# Posición X y propiedades físicas
 		auto.position.x = (i * separacion) + offset_inicial
-
-		# Propiedades con la nueva velocidad alterada
 		auto.velocidad = velocidad_final
 		auto.direccion = direccion
 
-		# Solo intentamos cambiar la textura si configuraste una en el Inspector
+		# Asignar textura (para los autos)
 		if textura != null and auto.has_node("Sprite"):
 			auto.get_node("Sprite").texture = textura
+			
+		# --- ASIGNAR LA TRAMPA (Para las tortugas) ---
+		# Preguntamos si la escena instanciada tiene la variable 'se_sumerge'
+		if "se_sumerge" in auto:
+			# Si el turno de esta tortuga (i) es el mismo que el número sorteado, se hunde.
+			if i == indice_traicionero:
+				auto.se_sumerge = true
+			else:
+				auto.se_sumerge = false
+
 		auto.inicializar()

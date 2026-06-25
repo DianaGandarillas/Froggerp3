@@ -108,12 +108,12 @@ tipo = 1
 position = Vector2(6.3177795, 211.17566)
 car_scene = ExtResource("10_5hcbo")
 tipo = 1
+direccion = -1.0
 
 [node name="CarLane9" parent="." unique_id=1072927570 instance=ExtResource("4_7hj5l")]
 position = Vector2(6.3177795, 257.17566)
 car_scene = ExtResource("14_tfcjc")
 tipo = 1
-direccion = -1.0
 
 [node name="Meta" parent="." unique_id=1974364635 instance=ExtResource("11_s54s1")]
 position = Vector2(99.398926, 23.909225)

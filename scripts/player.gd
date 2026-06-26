@@ -123,4 +123,9 @@ func _process(delta):
 		position.x += velocidad_plataforma * delta
 	elif en_agua:
 		morir()
+	
+	var pantalla = get_viewport_rect()
+	if global_position.x < 0 or global_position.x > pantalla.size.x \
+	or global_position.y < 0 or global_position.y > pantalla.size.y:
+		morir()
 		
